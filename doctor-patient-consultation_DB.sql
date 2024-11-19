@@ -19,7 +19,7 @@ CREATE TABLE doctor (
     age INT(3) NOT NULL,
     gender VARCHAR(6) NOT NULL,
     consultationFee DECIMAL(6,2) NOT NULL,
-	PRIMARY KEY (doctorID)
+    PRIMARY KEY (doctorID)
 );
 
 CREATE TABLE DoctorSpecializations (
@@ -99,7 +99,17 @@ INSERT INTO doctor (doctorID, doctorLastName, doctorFirstName, age, gender, cons
 (9909,'Gokongwei','John',73,'Male',1500.00),
 (9910,'Gonzales','Andrea',68,'Female',1000.00);
 
--- INSERT doctorSpecializations
+INSERT INTO medSpecialization(doctorID, specializationName) VALUES 
+(9901,'Pediatrics'),
+(9902,'General Surgery'),
+(9903,'Cardiology'),
+(9904,'Radiation Oncology'),
+(9905,'Gastroenterology'),
+(9906,'Internal Medicine,Endocrinology'),
+(9907,'Psychiatry'),
+(9908,'Neurology'),
+(9909,'Cardiology,Internal Medicine'),
+(9910,'Dermatology,Family Medicine');
 
 INSERT MedicalRecordsStorage (recordID, patientID, doctorID, diagnosis, treatmentPlan, dateOfRecord) VALUES
 (1, 1001, 9901, 'Hypertension', 'Consultation, Blood Test, Chest X-Ray', '2024-09-24'),
