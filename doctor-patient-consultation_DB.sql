@@ -99,7 +99,7 @@ INSERT INTO doctor (doctorID, doctorLastName, doctorFirstName, age, gender, cons
 (9909,'Gokongwei','John',73,'Male',1500.00),
 (9910,'Gonzales','Andrea',68,'Female',1000.00);
 
-INSERT INTO medSpecialization(doctorID, specializationName) VALUES 
+INSERT INTO DoctorSpecialization(doctorID, specializationName) VALUES 
 (9901,'Pediatrics'),
 (9902,'General Surgery'),
 (9903,'Cardiology'),
