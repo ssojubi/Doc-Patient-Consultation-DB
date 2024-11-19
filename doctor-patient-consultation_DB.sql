@@ -33,11 +33,12 @@ CREATE TABLE MedicalRecordsStorage (
     recordID INT AUTO_INCREMENT PRIMARY KEY,
     patientID INT NOT NULL,
     doctorID INT NOT NULL,
+    billingID INT NOT NULL,
     diagnosis VARCHAR(255) NOT NULL,
-    treatmentPlan TEXT NOT NULL,
     dateOfRecord DATE NOT NULL,
-	FOREIGN KEY (patientID) REFERENCES patient(patientID),
-    FOREIGN KEY (doctorID) REFERENCES doctor(doctorID)
+    FOREIGN KEY (patientID) REFERENCES patient(patientID),
+    FOREIGN KEY (doctorID) REFERENCES doctor(doctorID),
+    FOREIGN KEY (billingID) REFERENCES billed_record_management(billingID)
 );
 
 CREATE TABLE MedicationPrescription (
@@ -111,17 +112,17 @@ INSERT INTO DoctorSpecialization(doctorID, specializationName) VALUES
 (9909,'Cardiology,Internal Medicine'),
 (9910,'Dermatology,Family Medicine');
 
-INSERT MedicalRecordsStorage (recordID, patientID, doctorID, diagnosis, treatmentPlan, dateOfRecord) VALUES
-(1, 1001, 9901, 'Hypertension', 'Consultation, Blood Test, Chest X-Ray', '2024-09-24'),
-(2, 1002, 9902, 'Type 2 Diabetes', 'General Health Checkup, Basic Laboratory Tests', '2024-10-11'),
-(3, 1003, 9901, 'Migraine', 'Brain MRI Scan, Specialist Consultation', '2024-11-23'),
-(4, 1004, 9903, 'Chronic Kidney Disease', 'Abdominal Ultrasound, Kidney Function Test, Follow-Up Consultation', '2024-08-15'),
-(5, 1005, 9904, 'Musculoskeletal Pain', 'Physiotherapy Session, Prescription Medication, Therapy Follow-up Session', '2024-11-30'),
-(6, 1006, 9905, 'COVID-19', 'COVID-19 Vaccination', '2024-08-16'),
-(7, 1007, 9905, 'End-Stage Liver Disease', 'Liver Transplantation, Anesthesia Services, Post-Operative Monitoring', '2024-12-31'),
-(8, 1008, 9902, 'Dental Issues', 'Dental Cleaning, Oral X-Ray', '2024-05-26'),
-(9, 1009, 9907, 'Coronary Artery Disease', 'Cardiology Consultation, Electrocardiogram (ECG) Test, Comprehensive Blood Analysis', '2024-10-29'),
-(10, 1010, 9908, 'Heart Failure', 'Heart Surgery, ICU Charges, Post-Surgical Follow-up Consultation', '2024-11-10');
+INSERT MedicalRecordsStorage (recordID, patientID, doctorID, diagnosis, dateOfRecord, billingID) VALUES
+(1, 1001, 9901, 'Hypertension', '2024-09-24', 101),
+(2, 1002, 9902, 'Type 2 Diabetes', '2024-10-11', 102),
+(3, 1003, 9901, 'Migraine', '2024-11-23', 103),
+(4, 1004, 9903, 'Chronic Kidney Disease', '2024-08-15', 104),
+(5, 1005, 9904, 'Musculoskeletal Pain',  '2024-11-30', 105),
+(6, 1006, 9905, 'COVID-19', '2024-08-16', 106),
+(7, 1007, 9905, 'End-Stage Liver Disease', '2024-12-31', 107),
+(8, 1008, 9902, 'Dental Issues', '2024-05-26', 108),
+(9, 1009, 9907, 'Coronary Artery Disease', '2024-10-29', 109),
+(10, 1010, 9908, 'Heart Failure', '2024-11-10', 110);
 
 -- INSERT medical prescriptions
 
@@ -138,31 +139,29 @@ VALUES
 (NULL, 1009, 5000.00, 'Not Paid', '2024-11-01'),
 (NULL, 1010, 15000.00, 'Paid', '2024-11-10');
 
-INSERT INTO billed_services_table (serviceID, billingID, serviceName, serviceAmount)
-VALUES
+INSERT INTO billed_services_table (serviceID, billingID, serviceName, serviceAmount) VALUES
 (1, 101, 'Consultation', 500.00),
-(NULL, 101, 'Blood Test', 300.50),
-(NULL, 101, 'Chest X-Ray', 500.00),
-(NULL, 102, 'General Health Checkup', 300.00),
-(NULL, 102, 'Basic Laboratory Tests', 200.00),
-(NULL, 103, 'Brain MRI Scan', 1000.00),
-(NULL, 103, 'Specialist Consultation', 500.00),
-(NULL, 104, 'Abdominal Ultrasound', 750.00),
-(NULL, 104, 'Kidney Function Test', 500.00),
-(NULL, 104, 'Follow-up Consultation', 250.00),
-(NULL, 105, 'Physiotherapy Session', 600.75),
-(NULL, 105, 'Prescription Medication', 300.00),
-(NULL, 105, 'Therapy Follow-up Session', 300.00),
-(NULL, 106, 'COVID-19 Vaccination', 200.00),
-(NULL, 107, 'Liver Transplantation', 8000.00),
-(NULL, 107, 'Anesthesia Services', 1500.50),
-(NULL, 107, 'Post-Operative Monitoring', 500.00),
-(NULL, 108, 'Dental Cleaning', 400.00),
-(NULL, 108, 'Oral X-Ray', 250.00),
-(NULL, 109, 'Cardiology Consultation', 2000.00),
-(NULL, 109, 'Electrocardiogram (ECG) Test', 1000.00),
-(NULL, 109, 'Comprehensive Blood Analysis', 500.00),
-(NULL, 109, 'Chronic Condition Medication', 1500.00),
-(NULL, 110, 'Heart Surgery', 12000.00),
-(NULL, 110, 'ICU Charges', 2000.00),
-(NULL, 110, 'Post-Surgical Follow-up Consultation', 1000.00);
+(2, 101, 'Blood Test', 400.25),
+(3, 101, 'Chest X-Ray', 400.25),
+(4, 102, 'General Health Checkup', 300.00),
+(5, 102, 'Basic Laboratory Tests', 200.00),
+(6, 103, 'Brain MRI Scan', 1200.00),
+(7, 103, 'Specialist Consultation', 300.00),
+(8, 104, 'Abdominal Ultrasound', 600.00),
+(9, 104, 'Kidney Function Test', 500.00),
+(10, 104, 'Follow-Up Consultation', 400.00),
+(11, 105, 'Physiotherapy Session', 500.25),
+(12, 105, 'Prescription Medication', 350.25),
+(13, 105, 'Therapy Follow-up Session', 350.25),
+(14, 106, 'COVID-19 Vaccination', 200.00),
+(15, 107, 'Liver Transplantation', 8000.00),
+(16, 107, 'Anesthesia Services', 1500.25),
+(17, 107, 'Post-Operative Monitoring', 500.25),
+(18, 108, 'Dental Cleaning', 300.00),
+(19, 108, 'Oral X-Ray', 350.00),
+(20, 109, 'Cardiology Consultation', 2000.00),
+(21, 109, 'Electrocardiogram (ECG) Test', 1500.00),
+(22, 109, 'Comprehensive Blood Analysis', 1500.00),
+(23, 110, 'Heart Surgery', 12000.00),
+(24, 110, 'ICU Charges', 2000.00),
+(25, 110, 'Post-Surgical Follow-up Consultation', 1000.00);
