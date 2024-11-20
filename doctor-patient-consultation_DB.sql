@@ -106,11 +106,14 @@ INSERT INTO DoctorSpecialization(doctorID, specializationName) VALUES
 (9903,'Cardiology'),
 (9904,'Radiation Oncology'),
 (9905,'Gastroenterology'),
-(9906,'Internal Medicine,Endocrinology'),
+(9906,'Internal Medicine'),
+(9906,'Endocrinology'),
 (9907,'Psychiatry'),
 (9908,'Neurology'),
-(9909,'Cardiology,Internal Medicine'),
-(9910,'Dermatology,Family Medicine');
+(9909,'Cardiology'),
+(9909,'Internal Medicine'),
+(9910,'Dermatology'),
+(9910,'Family Medicine');
 
 INSERT MedicalRecordsStorage (recordID, patientID, doctorID, diagnosis, dateOfRecord, billingID) VALUES
 (1, 1001, 9901, 'Hypertension', '2024-09-24', 101),
