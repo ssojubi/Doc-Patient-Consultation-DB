@@ -1,10 +1,10 @@
 -- CREATION OF RELATIONS
 
 CREATE TABLE patient (
-    patientID INT(4) NOT NULL,
+    patientID INT NOT NULL,
     patientLastName VARCHAR(20) NOT NULL,
     patientFirstName VARCHAR(20) NOT NULL,
-    age INT(3) NOT NULL,
+    age INT NOT NULL,
     gender VARCHAR(6) NOT NULL,
     contactInformation VARCHAR(8) NOT NULL,
     dateOfBirth DATE NOT NULL,
@@ -13,10 +13,10 @@ CREATE TABLE patient (
 );
 
 CREATE TABLE doctor (
-    doctorID INT(4) NOT NULL,
+    doctorID INT NOT NULL,
     doctorLastName VARCHAR(20) NOT NULL,
     doctorFirstName VARCHAR(20) NOT NULL,
-    age INT(3) NOT NULL,
+    age INT NOT NULL,
     gender VARCHAR(6) NOT NULL,
     consultationFee DECIMAL(6,2) NOT NULL,
     PRIMARY KEY (doctorID)
@@ -29,17 +29,6 @@ CREATE TABLE DoctorSpecializations (
     FOREIGN KEY (doctorID) REFERENCES doctor(doctorID)
 );
 
-CREATE TABLE MedicalRecordsStorage (
-    recordID INT AUTO_INCREMENT PRIMARY KEY,
-    patientID INT NOT NULL,
-    doctorID INT NOT NULL,
-    billingID INT NOT NULL,
-    diagnosis VARCHAR(255) NOT NULL,
-    dateOfRecord DATE NOT NULL,
-    FOREIGN KEY (patientID) REFERENCES patient(patientID),
-    FOREIGN KEY (doctorID) REFERENCES doctor(doctorID),
-    FOREIGN KEY (billingID) REFERENCES billed_record_management(billingID)
-);
 
 CREATE TABLE MedicationPrescription (
     prescriptionID INT AUTO_INCREMENT PRIMARY KEY, 
@@ -55,7 +44,7 @@ CREATE TABLE MedicationPrescription (
 
 
 CREATE TABLE Billed_Record_Management(
-	billingID INT(3) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	billingID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	patientID INT,
 	amountDue DECIMAL(10,2) NOT NULL,
 	paymentStatus VARCHAR(10) NOT NULL,
@@ -64,13 +53,25 @@ CREATE TABLE Billed_Record_Management(
     );
 
 CREATE TABLE Billed_Services_Table (
-    serviceID INT(1) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    serviceID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     billingID INT,
     serviceName VARCHAR(50) NOT NULL,
     serviceAmount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (billingID) REFERENCES Billed_Record_Management(billingID)
 );
 
+
+CREATE TABLE MedicalRecordsStorage (
+    recordID INT AUTO_INCREMENT PRIMARY KEY,
+    patientID INT NOT NULL,
+    doctorID INT NOT NULL,
+    billingID INT NOT NULL,
+    diagnosis VARCHAR(255) NOT NULL,
+    dateOfRecord DATE NOT NULL,
+    FOREIGN KEY (patientID) REFERENCES patient(patientID),
+    FOREIGN KEY (doctorID) REFERENCES doctor(doctorID),
+    FOREIGN KEY (billingID) REFERENCES billed_record_management(billingID)
+);
 
 
 
@@ -100,7 +101,7 @@ INSERT INTO doctor (doctorID, doctorLastName, doctorFirstName, age, gender, cons
 (9909,'Gokongwei','John',73,'Male',1500.00),
 (9910,'Gonzales','Andrea',68,'Female',1000.00);
 
-INSERT INTO DoctorSpecialization(doctorID, specializationName) VALUES 
+INSERT INTO DoctorSpecializations(doctorID, specializationName) VALUES 
 (9901,'Pediatrics'),
 (9902,'General Surgery'),
 (9903,'Cardiology'),
@@ -115,19 +116,18 @@ INSERT INTO DoctorSpecialization(doctorID, specializationName) VALUES
 (9910,'Dermatology'),
 (9910,'Family Medicine');
 
-INSERT MedicalRecordsStorage (recordID, patientID, doctorID, diagnosis, dateOfRecord, billingID) VALUES
-(1, 1001, 9901, 'Hypertension', '2024-09-24', 101),
-(2, 1002, 9902, 'Type 2 Diabetes', '2024-10-11', 102),
-(3, 1003, 9901, 'Migraine', '2024-11-23', 103),
-(4, 1004, 9903, 'Chronic Kidney Disease', '2024-08-15', 104),
-(5, 1005, 9904, 'Musculoskeletal Pain',  '2024-11-30', 105),
-(6, 1006, 9905, 'COVID-19', '2024-08-16', 106),
-(7, 1007, 9905, 'End-Stage Liver Disease', '2024-12-31', 107),
-(8, 1008, 9902, 'Dental Issues', '2024-05-26', 108),
-(9, 1009, 9907, 'Coronary Artery Disease', '2024-10-29', 109),
-(10, 1010, 9908, 'Heart Failure', '2024-11-10', 110);
 
--- INSERT medical prescriptions
+INSERT INTO MedicationPrescription (patientID, doctorID, medicationName, dosage, startDate, endDate) VALUES
+(1001, 9901, 'Lisinopril', 10.00, '2024-09-24', '2024-12-24'),
+(1002, 9902, 'Metformin', 500.00, '2024-10-11', '2025-10-11'),
+(1003, 9901, 'Sumatriptan', 50.00, '2024-11-23', '2024-12-23'),
+(1004, 9903, 'Erythropoietin', 300.00,  '2024-08-15', '2025-08-15'),
+(1005, 9904, 'Ibuprofen', 400.00, '2024-11-30', '2025-01-30'),
+(1006, 9905, 'Paracetamol', 500.00, '2024-08-16', '2024-09-16'),
+(1007, 9905, 'Sofosbuvir', 400.00, '2024-12-31', '2025-12-31'),
+(1008, 9902, 'Amoxycillin', 500.00, '2024-05-26', '2024-06-26'),
+(1009, 9907, 'Aspirin', 100.00, '2024-10-29', '2025-10-29'),
+(1010, 9908, 'Furosemide', 40.00, '2024-11-10', '2025-11-10');
 
 INSERT INTO Billed_Record_Management
 VALUES 
@@ -168,3 +168,15 @@ INSERT INTO billed_services_table (serviceID, billingID, serviceName, serviceAmo
 (23, 110, 'Heart Surgery', 12000.00),
 (24, 110, 'ICU Charges', 2000.00),
 (25, 110, 'Post-Surgical Follow-up Consultation', 1000.00);
+
+INSERT MedicalRecordsStorage (recordID, patientID, doctorID, diagnosis, dateOfRecord, billingID) VALUES
+(1, 1001, 9901, 'Hypertension', '2024-09-24', 101),
+(2, 1002, 9902, 'Type 2 Diabetes', '2024-10-11', 102),
+(3, 1003, 9901, 'Migraine', '2024-11-23', 103),
+(4, 1004, 9903, 'Chronic Kidney Disease', '2024-08-15', 104),
+(5, 1005, 9904, 'Musculoskeletal Pain',  '2024-11-30', 105),
+(6, 1006, 9905, 'COVID-19', '2024-08-16', 106),
+(7, 1007, 9905, 'End-Stage Liver Disease', '2024-12-31', 107),
+(8, 1008, 9902, 'Dental Issues', '2024-05-26', 108),
+(9, 1009, 9907, 'Coronary Artery Disease', '2024-10-29', 109),
+(10, 1010, 9908, 'Heart Failure', '2024-11-10', 110);
