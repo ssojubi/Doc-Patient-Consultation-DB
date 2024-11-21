@@ -19,8 +19,9 @@
 
         <%
         String v_patientID = request.getParameter("patientID");
+        
         if (v_patientID != null && !v_patientID.isEmpty()) {
-        A.setPatientID(v_patientID);  // Set the patient ID in the billing bean
+            A.setPatientID(v_patientID);  // Set the patient ID in the billing bean
         
         int stat = A.updatePayStat();  // Call method to check payment status
 

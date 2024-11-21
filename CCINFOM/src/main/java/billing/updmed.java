@@ -13,58 +13,53 @@ import java.sql.*;
 public class updmed {
     public String patientID;
     public String diagnosis;
-    public java.sql.Date newDate;
-    
-    
     public String dburl = "jdbc:mysql://localhost:3306/doctor-patient-consultation";
     public String dbuser = "root";
     public String dbpass = "chevyLUV0606??";
     
-    public void setPatientID(String patientID){
+    // Setters
+    public void setPatientID(String patientID) {
         this.patientID = patientID;
     }
-    
-    public void setDiagnosis(String diagnosis){
+
+    public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
     }
-    
-    
-    public int updMedRec(){
-        String query = "UPDATE MedicalRecordsStorage\n"
-                + " SET diagnosis = ?, \n"
-                + "dateOfRecord = CURRENT_DATE\n"
-                + " WHERE patientID = ?;";
 
-        try (
-                Connection conn = DriverManager.getConnection(dburl, dbuser, dbpass); 
-                PreparedStatement pt = conn.prepareStatement(query)) {
-            // Set parameter for the query
-            pt.setString(1, diagnosis);
-            pt.setString(2, patientID);
-            // Execute query
-
-        int upd = pt.executeUpdate(); //1 something is updated, 0 if not
+    // Method to update medical records
+    public int updMedRec() {
         
-            // Close resources
-            pt.close();
-            return 0; // Success
+        try {
+        Connection conn = DriverManager.getConnection(dburl, dbuser, dbpass);
+        PreparedStatement query = conn.prepareStatement(
+                     "UPDATE medicalrecordsstorage "
+                     + " SET diagnosis = ?, "
+                     + " dateOfRecord = CURRENT_DATE "
+                     + " WHERE patientID = ?");
+        
+            query.setString(1, diagnosis);
+            query.setString(2, patientID);
+            int upd = query.executeUpdate(); // 1 if updated, 0 if not
+            
+            query.close();
+            return upd; 
         } catch (SQLException e) {
-            // Print stack trace for debugging
             e.printStackTrace();
-            return 1; // Failure
+            return 0; // Failure
         }
     }
-    
+
     public static void main(String[] args) {
         updmed test = new updmed();
         test.setPatientID("1002");
-        test.setDiagnosis("Type 2 Diabetes");
+        test.setDiagnosis("Type 2 Diabetes"); //Type 2 Diabetes
+        //Pneumonia
         
         int stat = test.updMedRec();
-        if (stat == 0) {
+        if (stat == 1) {
             System.out.println("Diagnosis updated to: "+test.diagnosis);
         } else {
             System.out.println("An error occurred while retrieving treatment plans.");
         }
     }
-}
+        }

@@ -22,7 +22,7 @@
             float f_newAmount = Float.parseFloat(v_newAmount);
             int stat;
             
-            if (v_patientID != null && !v_patientID.isEmpty()) {
+            if (v_patientID != null && !v_patientID.isEmpty() || (v_newAmount != null && !v_newAmount.isEmpty())) {
                 D.setPatientID(v_patientID);  // Set the patient ID in the billing bean
                 D.setNewAmount(f_newAmount);
                 

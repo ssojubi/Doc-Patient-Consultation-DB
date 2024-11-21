@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    
+     <!-- Define the servlet -->
+    <servlet>
+        <servlet-name>PaymentDueServlet</servlet-name>
+        <servlet-class>billing.paymentdue2</servlet-class>
+    </servlet>
+    
+    <!-- Map the servlet to a URL pattern -->
+    <servlet-mapping>
+        <servlet-name>PaymentDueServlet</servlet-name>
+        <url-pattern>/PaymentDueServlet</url-pattern>
+    </servlet-mapping>
+    
+    
     <servlet>
         <servlet-name>db</servlet-name>
         <servlet-class>db</servlet-class>

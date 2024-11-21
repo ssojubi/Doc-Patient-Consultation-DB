@@ -5,15 +5,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <title>Update Patient Record</title>
+        <title>Update Medical Diagnosis </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Enter Patient ID</div> <br>
-        <form action="checkstat.jsp" method="POST">
-         Patient ID: <input type="text" id="patientID" name="patientID"> <br>
-        <input type="submit" value="Submit">      
+        <div>Enter Patient ID and Patient's New Diagnosis</div> <br>
+        <form action="updmed.jsp" method="POST">
+            <label for="patientID">Patient ID:</label>
+            <input type="text" id="patientID" name="patientID" required> <br><br>
+            
+            <label for="amount">New Diagnosis:</label>
+            <input type="text" id="diagnosis" name="diagnosis" required> <br><br>
+            
+            <input type="submit" value="Submit">
         </form>
     </body>
 </html>

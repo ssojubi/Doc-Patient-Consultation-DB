@@ -3,8 +3,8 @@
 <head>
     <title>Payment Due Date</title>
 </head>
-<body>
-
+    <body>
+        <form action="index.html">
     <%
         String patientID = request.getParameter("patientID");
         String dueDate = "";
@@ -52,5 +52,8 @@
     <% } else if (!error.isEmpty()) { %>
         <p style="color: red;">Error: <%= error %></p>
     <% } %>
-</body>
+    <br>
+     <input type="submit" value="Return to Menu">
+        </form>
+    </body>
 </html>

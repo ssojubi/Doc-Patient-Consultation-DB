@@ -1,5 +1,5 @@
-<%@ page import="billing.patient" %>
 
+<%@ page import="java.sql.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,71 +8,90 @@
     </head>
     <body>
         <form action="index.html">
-<jsp:useBean id="A" class="billing.patient" scope="session"/>
 
 <%
     // Get the patient ID from the request parameter
-    String v_patientID = request.getParameter("patient");
-
+    String v_patientID = request.getParameter("patientID");
+    String id = "", age = "", bday = "", pLast = "", pFirst = "", gender = "", cInfo = "", eInfo = ""; // initialize to empty strings
+    String error = "";
     if (v_patientID != null && !v_patientID.isEmpty()) {
-        // Set the patient ID in the bean
-        A.setPatientID(Integer.parseInt(v_patientID));
-        
-        // Call the method to fetch patient data
-        int result = A.readPatient();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String dbUrl = "jdbc:mysql://localhost:3306/doctor-patient-consultation";
+            String dbUser = "root";
+            String dbPassword = "chevyLUV0606??";
+            String query = "SELECT * FROM patient WHERE patientID = ?";
 
-        if (result == 0) { // Success
-%>
+            Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, v_patientID);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                id = rs.getString("patientID");
+                pLast = rs.getString("patientLastName");
+                pFirst = rs.getString("patientFirstName");
+                age = rs.getString("age");
+                gender = rs.getString("gender");
+                cInfo = rs.getString("contactInformation");
+                bday = rs.getString("dateOfBirth");
+                eInfo = rs.getString("emergencyContact");
+            } else {
+                error = "No patient found for patient ID: " + v_patientID;
+            }
+
+            // Close connections
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            error = "Database error: " + e.getMessage();
+        }
+    }
+
+     
+      if(!pLast.isEmpty()){ %>
             <h2>Patient Details</h2>
             <table border="1">
                 <tr>
                     <td>Patient ID</td>
-                    <td><%= A.getPatientID() %></td>
+                    <td><%= id %></td>
                 </tr>
                 <tr>
                     <td>Last Name</td>
-                    <td><%= A.getLastName() %></td>
+                    <td><%= pLast %></td>
                 </tr>
                 <tr>
                     <td>First Name</td>
-                    <td><%= A.getFirstName() %></td>
+                    <td><%= pFirst %></td>
                 </tr>
                 <tr>
                     <td>Age</td>
-                    <td><%= A.getAge() %></td>
+                    <td><%= age %></td>
                 </tr>
                 <tr>
                     <td>Gender</td>
-                    <td><%= A.getGender() %></td>
+                    <td><%= gender %></td>
                 </tr>
                 <tr>
                     <td>Contact Information</td>
-                    <td><%= A.getCInfo() %></td>
+                    <td><%= cInfo %></td>
                 </tr>
                 <tr>
                     <td>Date of Birth</td>
-                    <td><%= A.getBday() %></td>
+                    <td><%= bday %></td>
                 </tr>
                 <tr>
                     <td>Emergency Contact</td>
-                    <td><%= A.getECont() %></td>
+                    <td><%= eInfo %></td>
                 </tr>
             </table>
-<%
-        } else { // No patient found or error
-%>
-            <h2>No Patient Found</h2>
-            <p>The record for Patient ID <%= v_patientID %> could not be found.</p>
-<%
-        } // End of result check
-    } else { // If no patient ID provided
-%>
-        <h2>Invalid Patient ID</h2>
-        <p>Please provide a valid Patient ID.</p>
-<%
-    } // End of patient ID check
-%>
- <input type="submit" value="Return to Menu">
-        </form>
-    </body>
+    <% } else if (!error.isEmpty()) { %>
+            <p style="color: red;">Error: <%= error %></p>
+        <% } %>
+        <br>
+     <input type="submit" value="Return to Menu">
+            </form>
+       </body>
 </html>
