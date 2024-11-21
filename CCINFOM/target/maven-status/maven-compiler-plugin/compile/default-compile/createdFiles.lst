@@ -1,0 +1,9 @@
+com\mycompany\test\resources\JakartaEE8Resource.class
+billing\patient.class
+billing\paymentdue.class
+billing\treatmentplans.class
+billing\billings.class
+billing\checkstat.class
+com\mycompany\test\JakartaRestConfiguration.class
+billing\updmed.class
+billing\patientrec.class
