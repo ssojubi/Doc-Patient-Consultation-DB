@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, billing.treatmentplans" %>  
 <%@ page import="java.sql.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
