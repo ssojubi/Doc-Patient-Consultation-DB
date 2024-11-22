@@ -5,9 +5,8 @@ package billing;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/**
- *
- * @author ADMIN
+/***
+ * @author Martina
  */
 import java.util.*;
 import java.sql.*;
@@ -28,8 +27,8 @@ public class billings {
         Connection conn = DriverManager.getConnection(dburl, dbuser, dbpass);
         PreparedStatement query = conn.prepareStatement(
             "UPDATE billed_record_management " +
-            "SET paymentStatus = 'Paid' " +
-            "WHERE patientID = ? AND paymentStatus = 'Not Paid';"
+            "SET paymentStatus = 'Not Paid' " +
+            "WHERE patientID = ? AND paymentStatus = 'Paid';"
         );
         query.setInt(1, patientID);
         int upd = query.executeUpdate(); //1 something is updated, 0 if not
@@ -42,23 +41,4 @@ public class billings {
         return 0;
         }
     }
-    
 }
-   /*
-    public static void main(String[] args){
-        /*aalisin tong main soon, but only here for the sake of 
-         knowing na nagana yung code mo, not here when running web app 
-        billings A = new billings();
-        A.setPatientID("1001");
-        A.readPatient();
-    }
-} 
-
-
-
-
-if(stat==1){
-            System.out.print("Success");
-        } else if (stat==0)
-            System.out.print("FLOP");
-*/

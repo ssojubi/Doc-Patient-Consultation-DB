@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 
 /**
  *
- * @author ADMIN
+ * @author Martina
  */
 public class patientrec {
     public String patientID;
@@ -48,23 +48,10 @@ public class patientrec {
                 
             query.close();
             conn.close();
-            return 0;//determines if something was changed in the database
+            return 0; //determines if something was changed in the database
         } catch (Exception e) {
             e.printStackTrace();
             return 1;
             }
     }
-    /*
-    public static void main(String[] args) {
-        patientrec test = new patientrec();
-        test.setPatientID("1002");
-        test.setNewAmount(500.00F);
-        int stat = test.updateAmount();
-        if (stat == 0) {
-            System.out.println("ID: " + test.patientID);
-            System.out.println("New Amount: " + test.amount);
-        } else if(stat==1){
-            System.out.println("An error occurred while retrieving treatment plans.");
-        }
-    }*/
 }

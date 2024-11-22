@@ -1,9 +1,5 @@
-com\mycompany\test\resources\JakartaEE8Resource.class
-billing\IEpaymentdue.class
-billing\billings.class
 com\mycompany\test\JakartaRestConfiguration.class
-billing\IEtreatmentplans.class
-billing\IEcheckstat.class
+com\mycompany\test\resources\JakartaEE8Resource.class
 billing\updmed.class
+billing\billings.class
 billing\patientrec.class
-billing\IEpatient.class

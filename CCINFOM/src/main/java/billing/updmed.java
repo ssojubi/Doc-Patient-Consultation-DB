@@ -8,7 +8,7 @@ import java.sql.*;
 
 /**
  *
- * @author ADMIN
+ * @author Martina
  */
 public class updmed {
     public String patientID;
@@ -17,7 +17,7 @@ public class updmed {
     public String dbuser = "root";
     public String dbpass = "chevyLUV0606??";
     
-    // Setters
+
     public void setPatientID(String patientID) {
         this.patientID = patientID;
     }
@@ -26,7 +26,6 @@ public class updmed {
         this.diagnosis = diagnosis;
     }
 
-    // Method to update medical records
     public int updMedRec() {
         
         try {
@@ -48,18 +47,4 @@ public class updmed {
             return 0; // Failure
         }
     }
-
-    public static void main(String[] args) {
-        updmed test = new updmed();
-        test.setPatientID("1002");
-        test.setDiagnosis("Type 2 Diabetes"); //Type 2 Diabetes
-        //Pneumonia
-        
-        int stat = test.updMedRec();
-        if (stat == 1) {
-            System.out.println("Diagnosis updated to: "+test.diagnosis);
-        } else {
-            System.out.println("An error occurred while retrieving treatment plans.");
-        }
-    }
-        }
+}

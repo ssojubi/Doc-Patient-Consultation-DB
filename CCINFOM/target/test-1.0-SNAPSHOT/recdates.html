@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Update Start and End Dates of prescription</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+       <div>Enter Patient ID and new Start Date and End Date of Prescription</div> <br>
+        <form action="recdates.jsp" method="POST">
+            <label for="patientID">Patient ID:</label>
+            <input type="text" id="patientID" name="patientID" required> <br><br>
+            
+            <label for="start">Start Date: use (yyyy-mm-dd)</label>
+            <input type="text" id="start" name="start" required> <br><br>
+            
+            <label for="end">End Date: use (yyyy-mm-dd)</label>
+            <input type="text" id="end" name="end" required> <br><br>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
