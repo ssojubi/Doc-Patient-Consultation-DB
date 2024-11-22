@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Patient Information</title>
+</head>
+<body>
+    <h1>Update Patient Information</h1>
+    <form action="validatePatient.jsp" method="get">
+        <label for="patientID">Enter Patient ID:</label>
+        <input type="text" id="patientID" name="patientID" required>
+        <input type="hidden" name="action" value="updatePatient">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
