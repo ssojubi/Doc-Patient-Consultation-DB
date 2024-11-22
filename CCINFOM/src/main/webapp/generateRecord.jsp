@@ -137,7 +137,7 @@
                                 <td><%= rs.getString("medicationName") %></td>
                             </tr>
                             <tr>
-                                <th>Dosage</th>
+                                <th>Dosage (mg)</th>
                                 <td><%= rs.getFloat("dosage") %></td>
                             </tr>
                             <tr>
