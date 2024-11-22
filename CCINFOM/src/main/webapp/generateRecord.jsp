@@ -24,7 +24,7 @@
         // Fetch the medical record from MedicalRecordsStorage based on patientID
         String sql = "SELECT p.patientID, p.patientFirstName, p.patientLastName, p.contactInformation, p.age, p.gender, p.dateOfBirth, p.emergencyContact, " +
                      "mr.recordID, mr.diagnosis, mr.dateOfRecord, d.doctorLastName, d.doctorFirstName, " +
-                     "mp.medicationName, mp.dosage, mp.startDate, mp.endDate " +  // Space added before "FROM"
+                     "mp.medicationName, mp.dosage, mp.startDate, mp.endDate " +
                      "FROM MedicalRecordsStorage mr " +
                      "JOIN medicationprescription mp ON mp.patientID = mr.patientID " +
                      "JOIN patient p ON mr.patientID = p.patientID " +
