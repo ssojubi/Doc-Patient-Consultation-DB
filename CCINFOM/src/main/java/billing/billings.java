@@ -27,8 +27,8 @@ public class billings {
         Connection conn = DriverManager.getConnection(dburl, dbuser, dbpass);
         PreparedStatement query = conn.prepareStatement(
             "UPDATE billed_record_management " +
-            "SET paymentStatus = 'Not Paid' " +
-            "WHERE patientID = ? AND paymentStatus = 'Paid';"
+            "SET paymentStatus = 'Paid' " +
+            "WHERE patientID = ? AND paymentStatus = 'Not Paid';"
         );
         query.setInt(1, patientID);
         int upd = query.executeUpdate(); //1 something is updated, 0 if not
