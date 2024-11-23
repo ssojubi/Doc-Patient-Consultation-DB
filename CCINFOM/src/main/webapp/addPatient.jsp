@@ -17,9 +17,9 @@
     String emergencyContact = request.getParameter("emergencyContact");
 
     // Database connection details
-    String url = "jdbc:mysql://localhost:3306/hospitaldb";
+    String url = "jdbc:mysql://localhost:3306/doctor-patient-consultation";
     String username = "root";
-    String password = "Kai0214<3";
+    String password = "chevyLUV0606??";
 
     Connection conn = null;
     PreparedStatement stmt = null;

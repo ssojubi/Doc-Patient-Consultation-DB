@@ -54,17 +54,10 @@
     }
             
          if(!presID.isEmpty()){ %>
-            <h2>Patient Details</h2>
+            <h2>Patient's Prescription Details</h2>
             <p> Patient ID: <%= id%>
             <table border="1">
-                <tr>
-                    <td>Prescription ID</td>
-                    <td><%= presID %></td>
-                </tr>
-                <tr>
-                    <td>Doctor ID</td>
-                    <td><%= docID %></td>
-                </tr>
+               
                 <tr>
                     <td>Medication Name</td>
                     <td><%= medName %></td>
