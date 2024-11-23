@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Update Amount Due</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <h1>Update Patient Due Amount</h1>
+        <p>Enter the Patient ID and the new due amount to update the record.</p>
+        <form action="patientrec.jsp" method="POST">
+            <label for="patientID">Patient ID:</label>
+            <input type="text" id="patientID" name="patientID" required> <br><br>
+            
+            <label for="amount">New Amount:</label>
+            <input type="text" id="amount" name="amount" required> <br><br>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
