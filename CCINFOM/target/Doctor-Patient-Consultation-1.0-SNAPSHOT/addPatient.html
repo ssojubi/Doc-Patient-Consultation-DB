@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Patient</title>
+</head>
+<body>
+    <h1>Add New Patient</h1>
+    <form action="addPatient.jsp" method="post">
+        <label for="patientID">Patient ID:</label>
+        <input type="text" id="patientID" name="patientID" required><br><br>
+
+        <label for="patientFirstName">First Name:</label>
+        <input type="text" id="patientFirstName" name="patientFirstName" required><br><br>
+
+        <label for="patientLastName">Last Name:</label>
+        <input type="text" id="patientLastName" name="patientLastName" required><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br><br>
+
+        <label for="contactInformation">Contact Information:</label>
+        <input type="text" id="contactInformation" name="contactInformation" required><br><br>
+
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" required><br><br>
+
+        <label for="emergencyContact">Emergency Contact:</label>
+        <input type="text" id="emergencyContact" name="emergencyContact" required><br><br>
+
+        <button type="submit">Add Patient</button>
+    </form>
+</body>
+</html>
