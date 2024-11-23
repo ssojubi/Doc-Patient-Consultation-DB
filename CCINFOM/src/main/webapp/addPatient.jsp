@@ -8,9 +8,9 @@
     String dateOfBirth = request.getParameter("dateOfBirth");
     String emergencyContact = request.getParameter("emergencyContact");
 
-    String url = "jdbc:mysql://localhost:3306/hospitaldb";
-    String username = "root";
-    String password = "Kai0214<3";
+    String dbUrl = "jdbc:mysql://localhost:3306/doctor-patient-consultation";
+    String dbUser = "root";
+    String dbPassword = "chevyLUV0606??";
 
     Connection conn = null;
     PreparedStatement stmt = null;
