@@ -18,7 +18,7 @@
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        conn = DriverManager.getConnection(url, username, password);
+        conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
         String getMaxID = "SELECT MAX(patientID) FROM patient";
         Statement maxIDStmt = conn.createStatement();
