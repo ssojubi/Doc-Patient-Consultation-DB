@@ -1,13 +1,5 @@
-<%-- 
-    Document   : addPatient
-    Created on : Nov 22, 2024, 4:48:15?PM
-    Author     : Guiller Fam
---%>
-
 <%@ page import="java.sql.*" %>
 <%
-    // Retrieve form data
-    String patientID = request.getParameter("patientID");
     String patientFirstName = request.getParameter("patientFirstName");
     String patientLastName = request.getParameter("patientLastName");
     String age = request.getParameter("age");
@@ -16,25 +8,29 @@
     String dateOfBirth = request.getParameter("dateOfBirth");
     String emergencyContact = request.getParameter("emergencyContact");
 
-    // Database connection details
-    String url = "jdbc:mysql://localhost:3306/doctor-patient-consultation";
+    String url = "jdbc:mysql://localhost:3306/hospitaldb";
     String username = "root";
-    String password = "chevyLUV0606??";
+    String password = "Kai0214<3";
 
     Connection conn = null;
     PreparedStatement stmt = null;
 
     try {
-        // Load MySQL JDBC Driver
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        // Connect to the database
         conn = DriverManager.getConnection(url, username, password);
 
-        // SQL query to insert the patient
+        String getMaxID = "SELECT MAX(patientID) FROM patient";
+        Statement maxIDStmt = conn.createStatement();
+        ResultSet rs = maxIDStmt.executeQuery(getMaxID);
+        int newPatientID = 1;
+        if (rs.next() && rs.getInt(1) > 0) {
+            newPatientID = rs.getInt(1) + 1;
+        }
+
         String sql = "INSERT INTO patient (patientID, patientFirstName, patientLastName, age, gender, contactInformation, dateOfBirth, emergencyContact) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, Integer.parseInt(patientID));
+        stmt.setInt(1, newPatientID);
         stmt.setString(2, patientFirstName);
         stmt.setString(3, patientLastName);
         stmt.setInt(4, Integer.parseInt(age));
@@ -47,7 +43,7 @@
         int rowsInserted = stmt.executeUpdate();
 
         if (rowsInserted > 0) {
-            out.println("<h2>Patient added successfully!</h2>");
+            out.println("<h2>Patient added successfully! Patient ID: " + newPatientID + "</h2>");
         } else {
             out.println("<h2>Failed to add patient. Please try again.</h2>");
         }
